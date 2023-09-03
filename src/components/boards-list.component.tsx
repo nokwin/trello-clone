@@ -2,8 +2,8 @@
 
 import { Boards } from "@prisma/client";
 import { BoardCard } from ".";
-import { useQuery } from "@tanstack/react-query";
 import { useBoards } from "@/hooks/use-boards";
+import { CreateBoard } from "./create-board.component";
 
 interface BoardsList {
   initialData: Boards[];
@@ -17,6 +17,7 @@ export function BoardsList({ initialData }: BoardsList) {
       {boards.map((board) => (
         <BoardCard key={board.id} id={board.id} title={board.title} />
       ))}
+      <CreateBoard />
     </div>
   );
 }
