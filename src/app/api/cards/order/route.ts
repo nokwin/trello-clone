@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/core/prisma";
 import { updateCardsOrderDto } from "../dto";
 
-export async function PUT(req: Request) {
+export async function PATCH(req: Request) {
   const bodyRaw = await req.json();
   const validateBody = updateCardsOrderDto.safeParse(bodyRaw);
 

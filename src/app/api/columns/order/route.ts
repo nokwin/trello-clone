@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { updateColumnsOrderDto } from "../dto";
 import { prisma } from "@/core/prisma";
 
-export async function PUT(req: Request) {
+export async function PATCH(req: Request) {
   const bodyRaw = await req.json();
   const validateBody = updateColumnsOrderDto.safeParse(bodyRaw);
 
