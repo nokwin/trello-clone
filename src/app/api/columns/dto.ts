@@ -14,6 +14,8 @@ export const updateColumnDto = createColumnDto
   })
   .partial();
 
+export type UpdateColumnDto = z.infer<typeof updateColumnDto>;
+
 export const updateColumnsOrderDto = z.array(
   z.object({
     id: z.string().uuid(),
