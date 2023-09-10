@@ -1,7 +1,6 @@
 import { api } from "@/core/api";
 import { Columns } from "@prisma/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useBoardsQueryKey } from "./use-boards";
 import { CreateColumnDto as CreateColumnDtoOriginal } from "@/app/api/columns/dto";
 import { BoardPayload } from "./use-board-query";
 

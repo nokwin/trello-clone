@@ -2,7 +2,7 @@
 
 import { Boards } from "@prisma/client";
 import { BoardCard, CreateBoard } from ".";
-import { useBoards } from "@/hooks/use-boards";
+import { useBoards } from "@/hooks/use-boards-query";
 
 interface BoardsList {
   initialData: Boards[];
