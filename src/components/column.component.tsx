@@ -1,17 +1,22 @@
 "use client";
 
-import { Columns } from "@prisma/client";
-import { DragEvent, useRef, useState } from "react";
+import { ColumnPayload, useColumnQuery } from "@/hooks/use-column-query";
+import { DragEvent, useEffect, useRef, useState } from "react";
 
 interface ColumnProps {
-  column: Columns;
+  column: ColumnPayload;
 }
 
 const MIN_WIDTH = 200;
 
 export function Column({ column }: ColumnProps) {
+  const { data } = useColumnQuery({ initialData: column });
+
   const initialDragX = useRef<number>(0);
-  const [width, setWidth] = useState(column.width);
+  const [width, setWidth] = useState(data.width);
+  useEffect(() => {
+    setWidth(data.width);
+  }, [data.width]);
 
   const onResizeStart = (e: DragEvent<HTMLDivElement>) => {
     initialDragX.current = e.clientX;
@@ -37,7 +42,7 @@ export function Column({ column }: ColumnProps) {
     >
       <div>
         <h5 className="text-lg font-bold tracking-tight text-white">
-          {column.title}
+          {data.title}
         </h5>
         <div
           className="absolute -right-px top-[0.5rem] bottom-[0.5rem] cursor-move w-px bg-gray-700 select-none opacity-0"
