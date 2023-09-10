@@ -1,5 +1,7 @@
 import { ColumnsList } from "@/components";
+import { api } from "@/core/api";
 import { prisma } from "@/core/prisma";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
@@ -10,6 +12,17 @@ interface PageParams {
 
 interface PageProps {
   params: PageParams;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = params;
+  const { data: metadata } = await api(`/api/boards/${id}/metadata`);
+
+  return {
+    title: `${metadata.title} | Trello Clone`,
+  };
 }
 
 export default async function BoardPage(props: PageProps) {

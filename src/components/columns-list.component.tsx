@@ -3,6 +3,7 @@
 import { BoardPayload, useBoardQuery } from "@/hooks/use-board-query";
 import { CreateColumn } from "./create-column.component";
 import { BoardTitle, Column } from ".";
+import { useEffect } from "react";
 
 interface ColumnsListProps {
   board: BoardPayload;
@@ -10,6 +11,10 @@ interface ColumnsListProps {
 
 export function ColumnsList({ board }: ColumnsListProps) {
   const { data } = useBoardQuery({ initialData: board });
+
+  useEffect(() => {
+    document.title = `${data.title} | Trello Clone`;
+  }, [data.title]);
 
   return (
     <>

@@ -19,9 +19,9 @@ export const useUpdateBoardMutation = () => {
     mutationFn: (data: { boardId: string; data: UpdateBoardDto }) =>
       updateBoardFn(data.boardId, data.data),
     onMutate: async (data) => {
-      const previousBoard = queryClient.getQueryData(["boards", data.boardId]);
+      const previousBoard = queryClient.getQueryData(["board", data.boardId]);
 
-      queryClient.setQueryData(["boards", data.boardId], (old) => ({
+      queryClient.setQueryData(["board", data.boardId], (old) => ({
         ...old!,
         ...data.data,
       }));
