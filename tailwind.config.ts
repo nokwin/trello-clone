@@ -9,7 +9,11 @@ const config: Config = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        content: "calc(100% - 11rem)",
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };
