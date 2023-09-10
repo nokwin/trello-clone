@@ -1,10 +1,6 @@
 import { api } from "@/core/api";
 import { Prisma } from "@prisma/client";
-import {
-  defaultShouldDehydrateQuery,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 export type BoardPayload = Prisma.BoardsGetPayload<{
@@ -41,6 +37,20 @@ export const useBoardQuery = ({ initialData }: UseBoardQueryOptions) => {
       queryClient.setQueryData(["column", column.id], () => column);
     });
   }, [query.data]);
+
+  return query;
+};
+
+interface UseCachedBoardQueryOptioms {
+  boardId: string;
+}
+
+export const useCachedBoardQuery = ({
+  boardId,
+}: UseCachedBoardQueryOptioms) => {
+  const query = useQuery<BoardPayload>(["board", boardId], {
+    networkMode: "offlineFirst",
+  });
 
   return query;
 };
