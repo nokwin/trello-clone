@@ -13,6 +13,8 @@ export const updateCardDto = createCardDto
   })
   .partial();
 
+export type UpdateCardDto = z.infer<typeof updateCardDto>;
+
 export const updateCardsOrderDto = z.array(
   z.object({
     id: z.string().uuid(),

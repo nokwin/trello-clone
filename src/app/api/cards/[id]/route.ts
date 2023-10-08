@@ -8,6 +8,27 @@ interface CardRouteContext {
   };
 }
 
+export async function GET(req: Request, { params }: CardRouteContext) {
+  const { id } = params;
+
+  const card = await prisma.cards.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!card) {
+    return NextResponse.json([
+      {
+        code: "not_found",
+        messages: "Card not found",
+      },
+    ]);
+  }
+
+  return NextResponse.json(card);
+}
+
 export async function PATCH(req: Request, { params }: CardRouteContext) {
   const { id } = params;
   const bodyRaw = await req.json();

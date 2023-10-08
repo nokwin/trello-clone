@@ -1,7 +1,7 @@
 import { api } from "@/core/api";
 import { Prisma } from "@prisma/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export type BoardPayload = Prisma.BoardsGetPayload<{
   include: { columns: { include: { cards: true } } };
@@ -26,13 +26,7 @@ export const useBoardQuery = ({ initialData }: UseBoardQueryOptions) => {
     initialData,
   });
 
-  const [isFirstRender, setIsFirstRender] = useState(true);
   useEffect(() => {
-    if (isFirstRender) {
-      setIsFirstRender(false);
-      return;
-    }
-
     query.data.columns.forEach((column) => {
       queryClient.setQueryData(["column", column.id], () => column);
 

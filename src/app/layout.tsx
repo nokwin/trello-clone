@@ -2,6 +2,7 @@ import { Navbar } from "@/components";
 import "./globals.css";
 import type { Metadata } from "next";
 import { ReactQueryProvider } from "@/providers";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata: Metadata = {
   title: "Trello clone",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <Navbar />
           {children}
+          <ReactQueryDevtools initialIsOpen={false} />
         </ReactQueryProvider>
       </body>
     </html>

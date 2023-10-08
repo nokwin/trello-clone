@@ -21,7 +21,11 @@ export async function GET(req: Request, { params }: BoardRouteContext) {
           order: "asc",
         },
         include: {
-          cards: true,
+          cards: {
+            orderBy: {
+              order: "asc",
+            },
+          },
         },
       },
     },

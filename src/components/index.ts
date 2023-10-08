@@ -8,3 +8,8 @@ export * from "./create-board.component";
 export * from "./create-column.component";
 export * from "./input.component";
 export * from "./board-title.component";
+export * from "./card.component";
+export * from "./card-dialog.component";
+export * from "./button.component";
+export * from "./dialog.component";
+export * from "./mdx-editor.component";

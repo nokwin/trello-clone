@@ -1,4 +1,5 @@
 import { ColumnsList } from "@/components";
+import { CardDialog } from "@/components/card-dialog.component";
 import { api } from "@/core/api";
 import { prisma } from "@/core/prisma";
 import { BoardProvider } from "@/providers/board.provider";
@@ -50,6 +51,7 @@ export default async function BoardPage(props: PageProps) {
   return (
     <BoardProvider>
       <ColumnsList board={board} />
+      <CardDialog />
     </BoardProvider>
   );
 }
