@@ -1,3 +1,18 @@
 import { PrismaClient } from "@prisma/client";
+import { config } from "./config";
 
-export const prisma = new PrismaClient();
+const prismaClientSingleton = () => {
+  return new PrismaClient();
+};
+
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClientSingleton | undefined;
+};
+
+export const prisma = globalForPrisma.prisma || prismaClientSingleton();
+
+if (!config.isProduction) {
+  globalForPrisma.prisma = prisma;
+}
