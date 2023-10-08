@@ -1,11 +1,11 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Input } from "./input.component";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useCreateBoardMutation } from "@/hooks/use-create-board-mutation";
+import { Button, Input } from ".";
 
 const createBoardSchema = z.object({
   title: z.string().min(1).max(20),
@@ -39,13 +39,22 @@ export function CreateBoard() {
       onClick={openForm}
     >
       {isFormOpened ? (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="relative">
           <Input
             {...register("title")}
             placeholder="Enter your board title"
             error={errors.title?.message}
             disabled={isSubmitting}
+            className="pr-20"
           />
+          <Button
+            size="xsmall"
+            className="absolute right-[5px] top-[5px]"
+            type="submit"
+            isLoading={isSubmitting}
+          >
+            Create
+          </Button>
         </form>
       ) : (
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

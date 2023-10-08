@@ -1,21 +1,39 @@
+import clsx from "clsx";
 import { PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
   onClick?: () => void;
   isLoading?: boolean;
+  size?: "xsmall" | "base";
+  className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 export function Button({
   children,
   onClick,
   isLoading,
+  size = "base",
+  className,
+  type = "button",
 }: PropsWithChildren<ButtonProps>) {
+  const buttonClasses = clsx(
+    {
+      "text-sm px-5 py-2.5": size === "base",
+      "px-3 py-2 text-xs": size === "xsmall",
+    },
+    className
+  );
+
   return (
     <button
       onClick={onClick}
-      type="button"
+      type={type}
       disabled={isLoading}
-      className="text-white focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 disabled:cursor-not-allowed"
+      className={twMerge(
+        `text-white focus:ring-4 font-medium rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 disabled:cursor-not-allowed ${buttonClasses}`
+      )}
     >
       {isLoading ? (
         <>

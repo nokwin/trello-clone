@@ -1,11 +1,11 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Input } from "./input.component";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useCreateCardMutation } from "@/hooks/use-create-card-mutation";
+import { Button, Input } from ".";
 
 const createCardSchema = z.object({
   title: z.string().min(1).max(20),
@@ -50,13 +50,22 @@ export function CreateCard({ columnId }: CreateCardProps) {
       onClick={openForm}
     >
       {isFormOpened ? (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="relative">
           <Input
             {...register("title")}
             placeholder="Enter your card title"
             error={errors.title?.message}
             disabled={isSubmitting}
+            className="pr-20"
           />
+          <Button
+            size="xsmall"
+            className="absolute right-[5px] top-[5px]"
+            type="submit"
+            isLoading={isSubmitting}
+          >
+            Create
+          </Button>
         </form>
       ) : (
         <h5 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">

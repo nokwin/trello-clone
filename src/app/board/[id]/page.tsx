@@ -38,7 +38,11 @@ export default async function BoardPage(props: PageProps) {
           order: "asc",
         },
         include: {
-          cards: true,
+          cards: {
+            orderBy: {
+              order: "asc",
+            },
+          },
         },
       },
     },
