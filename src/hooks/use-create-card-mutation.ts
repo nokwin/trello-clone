@@ -35,13 +35,12 @@ export const useCreateCardMutation = ({
 
       cards.push(newCard);
 
-      queryClient.setQueriesData<ColumnPayload>(
-        ["column", columnId],
-        (old) => ({
-          ...old!,
-          cards,
-        })
-      );
+      queryClient.setQueryData<ColumnPayload>(["column", columnId], (old) => ({
+        ...old!,
+        cards,
+      }));
+
+      queryClient.setQueryData(["card", newCard.id], () => newCard);
 
       return newCard;
     },

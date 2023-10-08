@@ -35,6 +35,10 @@ export const useBoardQuery = ({ initialData }: UseBoardQueryOptions) => {
 
     query.data.columns.forEach((column) => {
       queryClient.setQueryData(["column", column.id], () => column);
+
+      column.cards.forEach((card) => {
+        queryClient.setQueryData(["card", card.id], () => card);
+      });
     });
   }, [query.data]);
 

@@ -4,6 +4,7 @@ import { ColumnPayload, useColumnQuery } from "@/hooks/use-column-query";
 import { useUpdateColumnMutation } from "@/hooks/use-update-column-mutation";
 import { DragEvent, useEffect, useRef, useState } from "react";
 import { CreateCard } from "./create-card.component";
+import { Card } from "./card.component";
 
 interface ColumnProps {
   column: ColumnPayload;
@@ -61,12 +62,7 @@ export function Column({ column }: ColumnProps) {
       </div>
       <div className="flex gap-4 flex-col px-4">
         {data.cards.map((card) => (
-          <div
-            key={card.id}
-            className="flex items-center p-3 text-base font-bold rounded-lg group cursor-pointer hover:shadow bg-gray-600 hover:bg-gray-500 text-white"
-          >
-            {card.title}
-          </div>
+          <Card key={card.id} card={card} />
         ))}
         <CreateCard columnId={column.id} />
       </div>

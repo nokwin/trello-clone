@@ -1,6 +1,7 @@
 import { ColumnsList } from "@/components";
 import { api } from "@/core/api";
 import { prisma } from "@/core/prisma";
+import { BoardProvider } from "@/providers/board.provider";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -47,8 +48,8 @@ export default async function BoardPage(props: PageProps) {
   }
 
   return (
-    <>
+    <BoardProvider>
       <ColumnsList board={board} />
-    </>
+    </BoardProvider>
   );
 }
