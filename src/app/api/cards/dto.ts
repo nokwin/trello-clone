@@ -5,6 +5,8 @@ export const createCardDto = z.object({
   columnId: z.string().uuid(),
 });
 
+export type CreateCardDto = z.infer<typeof createCardDto>;
+
 export const updateCardDto = createCardDto
   .extend({
     description: z.string().nullable(),
