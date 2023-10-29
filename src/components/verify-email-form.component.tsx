@@ -78,7 +78,9 @@ export function VerifyEmailForm({ token }: VerifyEmailFormProps) {
       onSubmit={onSubmit}
       className="flex flex-col border rounded-lg shadow bg-gray-800 border-gray-700 p-4 w-96 gap-4"
     >
-      <h1 className="text-3xl text-white font-bold">Verify your email</h1>
+      <h1 className="text-3xl text-white font-bold text-center">
+        Verify your email
+      </h1>
       {errors.root?.message && (
         <p className="text-sm text-red-500 font-medium">
           {errors.root.message}
@@ -86,6 +88,7 @@ export function VerifyEmailForm({ token }: VerifyEmailFormProps) {
       )}
       <Input
         {...register("email")}
+        type="email"
         placeholder="Enter your email"
         error={errors.email?.message}
         disabled={isSubmitting}

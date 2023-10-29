@@ -10,7 +10,7 @@ const verifyEmailFn = async (body: VerifyEmailDto) => {
 
 export const useVerifyEmailMutation = () => {
   const mutation = useMutation({
-    mutationFn: (data: { token: string; email: string }) => verifyEmailFn(data),
+    mutationFn: verifyEmailFn,
   });
 
   return mutation;
