@@ -14,6 +14,9 @@ export function Navbar() {
           <Button size="xsmall" as="a" href="/auth/sign-up">
             Sign Up
           </Button>
+          <Button size="xsmall" as="a" href="/auth/sign-in">
+            Sign In
+          </Button>
           <UserDropdown />
         </div>
       </div>
