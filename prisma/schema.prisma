@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Boards {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   title     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  columns   Columns[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  columns Columns[]
 }
 
 model Columns {
@@ -27,7 +28,8 @@ model Columns {
   width     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  cards     Cards[]
+
+  cards Cards[]
 }
 
 model Cards {
@@ -39,4 +41,40 @@ model Cards {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   order       Int
+}
+
+model Users {
+  id        String   @id @default(uuid())
+  username  String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  credentials       Credentials[]
+  verifyEmailTokens VerifyEmailTokens[]
+}
+
+model Credentials {
+  id          String       @id @default(uuid())
+  userId      String
+  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider    AuthProvider
+  accessToken String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([userId, provider])
+}
+
+model VerifyEmailTokens {
+  id        String   @id @default(uuid())
+  userId    String
+  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expires   DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum AuthProvider {
+  EMAIL
 }
