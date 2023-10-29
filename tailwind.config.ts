@@ -13,6 +13,9 @@ const config: Config = {
       height: {
         content: "calc(100% - 11rem)",
       },
+      spacing: {
+        26: "6.5rem",
+      },
     },
   },
   plugins: [require("flowbite/plugin")],
