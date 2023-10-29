@@ -76,7 +76,7 @@ export function SignUpForm() {
         </Link>
       </p>
       {errors.root?.message && (
-        <p className="text-sm text-red-500 font-medium">
+        <p className="text-center text-red-500 font-medium">
           {errors.root.message}
         </p>
       )}

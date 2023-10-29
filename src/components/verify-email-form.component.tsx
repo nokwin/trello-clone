@@ -79,7 +79,7 @@ export function VerifyEmailForm({ token }: VerifyEmailFormProps) {
         Verify your email
       </h1>
       {errors.root?.message && (
-        <p className="text-sm text-red-500 font-medium">
+        <p className="text-center text-red-500 font-medium">
           {errors.root.message}
         </p>
       )}
