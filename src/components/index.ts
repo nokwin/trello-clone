@@ -15,3 +15,4 @@ export * from "./dialog.component";
 export * from "./mdx-editor.component";
 export * from "./verify-email-form.component";
 export * from "./sign-up-form.component";
+export * from "./resend-email.component";

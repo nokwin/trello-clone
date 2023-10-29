@@ -32,4 +32,8 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .block-wrapper {
+    @apply flex flex-col border rounded-lg shadow bg-gray-800 border-gray-700 p-4 w-96 gap-4;
+  }
 }

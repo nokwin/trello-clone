@@ -5,6 +5,7 @@ import { prisma } from "@/core/prisma";
 import { AuthProvider } from "@prisma/client";
 import { config } from "@/core/config";
 import { mailTransport } from "@/core/nodemailer";
+import { sendVerifyEmail } from "@/utils/emails";
 
 export async function POST(req: Request) {
   const bodyRaw = await req.json();
@@ -68,13 +69,7 @@ export async function POST(req: Request) {
     },
   });
 
-  await mailTransport.sendMail({
-    from: config.mail.from,
-    to: user.email,
-    subject: "Verify your email",
-    html: `Please, verify your email <a href="${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}">here</a>. <br /><br /> If rediret doesn't work, please copy this link to your browser: ${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}`,
-    text: `Please, verify your email here: ${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}`,
-  });
+  await sendVerifyEmail(email, verifyEmailToken.id);
 
   return NextResponse.json(user);
 }

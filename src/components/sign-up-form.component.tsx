@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Button, Input } from ".";
 import { useSignUpMutation } from "@/hooks/use-sign-up-mutation";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 const signUpFormSchema = z
   .object({
@@ -24,11 +25,12 @@ type SignUpFormValues = z.infer<typeof signUpFormSchema>;
 
 export function SignUpForm() {
   const { mutateAsync } = useSignUpMutation();
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid, isDirty },
     setError,
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpFormSchema),
@@ -41,6 +43,7 @@ export function SignUpForm() {
         email: values.email,
         password: values.password,
       });
+      router.replace(`/auth/sign-up/success?email=${values.email}`);
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.data.code === "user_already_exists") {
@@ -59,10 +62,7 @@ export function SignUpForm() {
   });
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex flex-col border rounded-lg shadow bg-gray-800 border-gray-700 p-4 w-96 gap-4"
-    >
+    <form onSubmit={onSubmit} className="block-wrapper">
       <h1 className="text-3xl text-white font-bold text-center">
         Register a new account
       </h1>
@@ -103,7 +103,13 @@ export function SignUpForm() {
         placeholder="Confirm password"
         error={errors.passwordConfirmation?.message}
       />
-      <Button type="submit">Sign up</Button>
+      <Button
+        isLoading={isSubmitting}
+        disabled={!isValid || !isDirty}
+        type="submit"
+      >
+        Sign up
+      </Button>
     </form>
   );
 }

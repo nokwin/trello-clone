@@ -74,10 +74,7 @@ export function VerifyEmailForm({ token }: VerifyEmailFormProps) {
   });
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="flex flex-col border rounded-lg shadow bg-gray-800 border-gray-700 p-4 w-96 gap-4"
-    >
+    <form onSubmit={onSubmit} className="block-wrapper">
       <h1 className="text-3xl text-white font-bold text-center">
         Verify your email
       </h1>
