@@ -13,3 +13,4 @@ export * from "./card-dialog.component";
 export * from "./button.component";
 export * from "./dialog.component";
 export * from "./mdx-editor.component";
+export * from "./verify-email-form.component";

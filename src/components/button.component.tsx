@@ -8,6 +8,7 @@ interface ButtonProps {
   size?: "xsmall" | "base";
   className?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export function Button({
@@ -17,6 +18,7 @@ export function Button({
   size = "base",
   className,
   type = "button",
+  disabled,
 }: PropsWithChildren<ButtonProps>) {
   const buttonClasses = clsx(
     {
@@ -30,9 +32,9 @@ export function Button({
     <button
       onClick={onClick}
       type={type}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
       className={twMerge(
-        `text-white focus:ring-4 font-medium rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 disabled:cursor-not-allowed ${buttonClasses}`
+        `text-white focus:ring-4 font-medium rounded-lg bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-blue-800 disabled:cursor-not-allowed disabled:hover:bg-blue-600 disabled:grayscale ${buttonClasses}`
       )}
     >
       {isLoading ? (

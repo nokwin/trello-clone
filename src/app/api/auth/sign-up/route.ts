@@ -68,11 +68,11 @@ export async function POST(req: Request) {
     },
   });
 
-  const test = await mailTransport.sendMail({
+  await mailTransport.sendMail({
     from: config.mail.from,
     to: user.email,
     subject: "Verify your email",
-    html: `Please, verify your email <a href="${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}">here</a>`,
+    html: `Please, verify your email <a href="${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}">here</a>. <br /><br /> If rediret doesn't work, please copy this link to your browser: ${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}`,
     text: `Please, verify your email here: ${config.baseApiUri}/auth/verify-email/${verifyEmailToken.id}`,
   });
 

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import '~@mdxeditor/editor/style.css';
+@import "~@mdxeditor/editor/style.css";
 
 .markdown-section h1 {
   font-size: 2rem;
@@ -26,4 +26,10 @@
 
 .markdown-section h6 {
   font-size: 0.67rem;
+}
+
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
 }

@@ -44,11 +44,12 @@ model Cards {
 }
 
 model Users {
-  id        String   @id @default(uuid())
-  username  String
-  email     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String   @id @default(uuid())
+  username        String   @unique
+  email           String   @unique
+  isEmailVerified Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   credentials       Credentials[]
   verifyEmailTokens VerifyEmailTokens[]
